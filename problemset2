@@ -1,0 +1,73 @@
+for i in range(12):
+
+    balance = balance - (balance * monthlyPaymentRate) + ((balance - (balance * monthlyPaymentRate)) * (annualInterestRate/12))
+
+print("Remaining balance:", round(balance, 2))
+
+#############################################################
+
+# Paste your code into this box
+mpr = 0
+
+balance0 = balance
+
+mir = 0.2/12
+
+
+
+while balance > 0:
+
+    for i in range(12):
+
+        balance = balance - mpr + ((balance - mpr) * mir)
+
+    if balance > 0:
+
+        mpr += 10
+
+        balance = balance0
+
+    elif balance <= 0:
+
+        break
+
+print('Lowest Payment:'+ str(mpr))
+
+####################################################################
+
+# Paste your code into this box
+balance0 = balance
+
+mir = 0.2/12
+
+lower = balance0/12
+
+upper = (balance0 * (1 + mir)**12)/12.0
+
+epsilon = 0.03
+
+
+
+while abs(balance) > epsilon:
+
+    mpr = (upper + lower)/2
+
+    balance = balance0
+
+    for i in range(12):
+
+        balance = balance - mpr + ((balance - mpr) * mir)
+
+    if balance > epsilon:
+
+        lower = mpr
+
+    elif balance < -epsilon:
+
+        upper = mpr
+
+    else:
+
+        break
+
+print('Lowest Payment:'+ str(round(mpr, 2)))
